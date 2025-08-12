@@ -83,6 +83,37 @@ let lastCommand = "";
         window.open("https://deepseek.com");
         response = "Opening Deepseek.";
       }
+        else if (command.includes("open camera")) {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+              const video = document.createElement("video");
+              video.srcObject = stream;
+              video.autoplay = true;
+              document.body.appendChild(video);
+              response = "Opening camera.";
+            })
+            .catch(function(error) {
+              response = "Error accessing camera: " + error.message;
+            });
+        } else {
+          response = "Camera access is not supported in this browser.";
+        }
+      } else if (command.includes("close camera")) {
+        const video = document.querySelector("video");
+        if (video) {
+          const stream = video.srcObject;
+          if (stream) {
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+          }
+          video.remove();
+          response = "Camera closed.";
+        } else {
+          response = "No camera is currently open.";
+        }
+      }
+      
 
       // Hindi
       else if (command.includes("namaste") || command.includes("kaise ho")) {
@@ -101,7 +132,16 @@ let lastCommand = "";
         response = "Bonjour! Je suis Jarvis, comment puis-je vous aider?";
         lang = "fr-FR";
       }
-
+        // Spanish
+        else if (command.includes("hola") || command.includes("cómo estás")) {
+            response = "¡Hola! Soy Jarvis, ¿cómo puedo ayudarte?";
+            lang = "es-ES";
+        }
+        // Bhojpuri
+        else if (command.includes("ka haal ba") || command.includes("pranam")) {
+        response = "Pranam! Hum theek bani, ka haal ba?";
+        lang = "bho-IN";
+      } else if (command.includes("stop listening") || command.includes("stop")) {
       else {
         response = "Sorry, I didn't understand that.";
       }
