@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherNow — Simple Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <div class="app">
+      <header class="header">
+        <div class="brand"><span class="dot"></span> WeatherNow <span class="muted">by You</span></div>
+
+        <div class="controls" style="flex:1; justify-content:flex-end">
+          <div class="search">
+            <span class="icon">🔎</span>
+            <input id="cityInput" type="text" placeholder="Search city... (e.g., Delhi, London)" autocomplete="off" />
+            <button class="clear" id="clearBtn" title="Clear">×</button>
+          </div>
+          <button class="btn" id="geoBtn" title="Use current location">⦿</button>
+          <button class="btn primary" id="searchBtn">Search</button>
+          <button class="btn" id="settingsBtn" title="Settings">⚙️</button>
+          <details class="diag">
+            <summary class="btn" title="Diagnostics">🧪</summary>
+            <div class="box">
+              <div class="badge" id="modeBadge">Mode: <strong>Demo</strong></div>
+              <div style="display:flex; gap:8px; margin-top:8px">
+                <button class="btn" id="runTestsBtn">Run Tests</button>
+                <button class="btn" id="toggleDemoBtn">Toggle Demo</button>
+              </div>
+              <div class="muted" style="margin-top:8px; font-size:12px">Use Demo Mode for offline testing. "Toggle Demo" will switch between real API and mock data.</div>
+            </div>
+          </details>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- Left: Current weather -->
+        <div class="panel">
+          <div class="current">
+            <div>
+              <div class="city" id="cityName">—</div>
+              <div class="desc" id="weatherDesc">Search a city to begin</div>
+              <div class="temp" id="tempMain">--°</div>
+              <div class="meta">
+                <div class="chip">🌡️ RealFeel: <span id="feelsLike">—</span></div>
+                <div class="chip">💧 Humidity: <span id="humidity">—</span></div>
+                <div class="chip">💨 Wind: <span id="wind">—</span></div>
+                <div class="chip">📏 Pressure: <span id="pressure">—</span></div>
+                <div class="chip">🌍 Coordinates: <span id="coords">—</span></div>
+              </div>
+            </div>
+            <div>
+              <img id="bigIcon" class="big-icon" alt="icon" src=""/>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:16px">
+            <div class="card" style="flex:1">
+              <div class="muted">Sunrise</div>
+              <div id="sunrise" style="font-weight:700; font-size:20px">—</div>
+            </div>
+            <div class="card" style="flex:1">
+              <div class="muted">Sunset</div>
+              <div id="sunset" style="font-weight:700; font-size:20px">—</div>
+            </div>
+            <div class="card" style="flex:1">
+              <div class="muted">Visibility</div>
+              <div id="visibility" style="font-weight:700; font-size:20px">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Forecast -->
+        <div class="panel">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px">
+            <div style="font-weight:700">Next 5 Days</div>
+            <div class="status" id="status"></div>
+          </div>
+          <div class="forecast" id="forecastGrid"></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="toggle">
+          <span>Units</span>
+          <div class="switch" id="unitSwitch" role="switch" aria-label="Toggle Celsius Fahrenheit" tabindex="0">
+            <div class="knob"></div>
+          </div>
+          <span><span id="unitLabel">°C</span></span>
+        </div>
+        <div class="muted">Data by OpenWeather · Built by Saurabh Sharma</div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="backdrop" id="settingsModal">
+    <div class="modal">
+      <h3>Settings</h3>
+      <div class="row">
+        <label for="keyInput" style="min-width:90px">API Key</label>
+        <input id="keyInput" type="password" placeholder="Paste your OpenWeather API key" />
+      </div>
+      <div class="actions">
+        <button class="btn" id="clearKeyBtn" title="Remove saved key">Clear</button>
+        <button class="btn primary" id="saveKeyBtn">Save</button>
+        <button class="btn" id="closeModalBtn">Close</button>
+      </div>
+      <div class="muted" style="margin-top:8px; font-size:12px">Your key is stored only in this browser (localStorage).</div>
+    </div>
+  </div>
+    <script src="script.js"></script>
+</body>
+</html>
