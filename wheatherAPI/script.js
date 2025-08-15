@@ -1,6 +1,6 @@
  // ===================== CONFIG & STATE =====================
     const BASE = "https://api.openweathermap.org/data/2.5";
-    const STORAGE_KEY = "d39a65fe1c4e0c3dfb2eec37419bddf8";
+    const STORAGE_KEY = "typeahead-weather-api-key";
 
     const state = {
       unit: "metric", // "metric" or "imperial"
